@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5c318941-3ae0-47d2-b6c1-212da1e5b6a5" name="Changes" comment="initial commit">
+      <change afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/src/main/java/com/example/activity_service/mappers/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/activity-service/src/main/java/com/example/activity_service/models/Response/UserActivityResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/ai-service/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/ai-service/src/main/java/com/example/ai_service/controller/AIController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/ai-service/src/main/java/com/example/ai_service/dto/AiServiceResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/ai-service/src/main/java/com/example/ai_service/dto/CareerPathDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/ai-service/src/main/java/com/example/ai_service/dto/GenerateCareerPathRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/ai-service/src/main/java/com/example/ai_service/dto/GenerateRoadMapRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/ai-service/src/main/java/com/example/ai_service/dto/GenerateSkillsRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/ai-service/src/main/java/com/example/ai_service/service/GeminiService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/AuthServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/controller/RegisterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/dto/request/LoginRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/dto/request/RegisterRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/dto/response/LoginResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/dto/response/RegisterResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/entity/CodingProfiles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/entity/Profile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/repository/UserRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/service/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/service/RegisterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/client/AIClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/client/UserDetailsClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/client/UserSkillsClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/controller/CareerPathController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/dto/AiServiceResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/dto/CareerPathRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/dto/CareerPathResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/dto/GenerateCareerPathRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/dto/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/dto/UserDetailsServiceResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/entity/CareerPath.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/entity/Response/PhasesResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/mappers/PhasesMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/repository/CareerPathRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/career-path-service/src/main/java/com/example/career_path/career_path/service/CareerPathService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/dashboard-service/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/dashboard-service/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/dashboard-service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/dashboard-service/HELP.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/dashboard-service/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/dashboard-service/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/eureka-server/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/search-service/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/search-service/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/search-service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/client/AuthClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/Activity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/CareerPath.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/CodingProfiles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/DailyActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/Phases.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/UserActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/request/AddSkillRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/request/LoginRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/request/ProgressUpdateRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/request/RegisterRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/request/RemoveSkillRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/request/UserActivityRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/ActivityResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/AddSkillResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/CareerPathResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/GetSkillsResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/LoginResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/PhasesResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/ProfileResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/ProgressResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/RegisterResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/RemoveSkillsResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/skillroute-api-gateway/src/main/java/com/example/skillroute_api_gateway/dto/response/UserActivityResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/user-details-service/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/user-details-service/src/main/java/com/example/user_details_service/entity/Response/AddSkillResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/user-details-service/src/main/java/com/example/user_details_service/entity/Response/GetSkillsResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/user-details-service/src/main/java/com/example/user_details_service/entity/Response/RemoveSkillsResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/user-details-service/src/main/java/com/example/user_details_service/entity/requests/RemoveSkillRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Config2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Pair.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/ActivityRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/AuthRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/CareerPathRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/DailyActivityRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/ModuleRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/PhasesRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/ProfileRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/ProgressRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/RoadMapRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/SkillsRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/StreakRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/UserRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/Repositories/UserSkillsRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/SkillIntellegencePlatformApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/Auth.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/CareerPathController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/DashboardController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/ModuleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/PhasesController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/ProfileController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/ProgressController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/RoadMapController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/SearchController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/StreakController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/TestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/UserActivityController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/UserSkills.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/controllers/health.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/filters/JwtFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Activity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/CareerPaths.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/CodingProfiles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/DailyActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Dummy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Module.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Phases.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Profile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Response/ActivityResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Response/CareerPathResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Response/LoginResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Response/ModuleResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Response/OllamaResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Response/ProfileResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Response/ProgressResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Response/RoadMapResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Response/SearchResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Response/UserSkillsResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/RoadMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Skills.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/Streak.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/UserActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/UserProgress.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/UserSkills.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/mappers/UserMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/ph4/Choices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/ph4/Message.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/ph4/Ph4Response.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/requests/AddSkillRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/requests/CareerPathRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/requests/OllamaRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/requests/ProgressUpdateRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/requests/RegisterRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/requests/RoadMapRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/requests/UserActivityRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/models/security/MyUserDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/projections/ActiveTimeProjection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/AIService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/AuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/AutoUpdateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/CareerPathService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/DailyActivityService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/DashboardService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/GeminiService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/ModuleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/PhasesService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/Phi4Service.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/ProfileService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/ProgressService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/RoadMapService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/SearchService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/SkillsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/StreakService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/UserActivityService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/UserSkillsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/security/JwtService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/java/com/example/skillIntellegencePlatform/services/security/MyUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/src/nav/SignUp.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/src/nav/SignUp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/main/resources/ui/skill_route/src/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/skillRoute-backend/src/test/java/com/example/skillIntellegencePlatform/SkillIntellegencePlatformApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SkillRoute-frontend/node_modules/.vite/deps/@radix-ui_react-label.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SkillRoute-frontend/node_modules/.vite/deps/@radix-ui_react-label.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SkillRoute-frontend/node_modules/.vite/deps/@radix-ui_react-tabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SkillRoute-frontend/node_modules/.vite/deps/@radix-ui_react-tabs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SkillRoute-frontend/node_modules/.vite/deps/_metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SkillRoute-frontend/node_modules/.vite/deps/_metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SkillRoute-frontend/src/app/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SkillRoute-frontend/src/app/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SkillRoute-frontend/src/app/components/SkillInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SkillRoute-frontend/src/app/components/SkillInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SkillRoute-frontend/src/app/pages/AuthPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SkillRoute-frontend/src/app/pages/AuthPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SkillRoute-frontend/src/app/pages/SkillsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/SkillRoute-frontend/src/app/pages/SkillsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/SkillRoute-frontend/src/app/routes.ts" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="3GgYdfaGBo3EQbPJNmNSKR3OXdh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.SkillIntellegencePlatformApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.SkillIntellegencePlatformApplication.executor&quot;: &quot;Coverage&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/thoka/MyProjects/SkillRoute&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\thoka\MyProjects\SkillRoute\backend\dashboard-service" />
+      <recent name="C:\Users\thoka\MyProjects\SkillRoute\backend" />
+      <recent name="C:\Users\thoka\MyProjects\SkillRoute\backend\activity-service" />
+      <recent name="C:\Users\thoka\MyProjects\SkillRoute\backend\search-service" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="SkillIntellegencePlatformApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.skillIntellegencePlatform.SkillIntellegencePlatformApplication" />
+      <module name="skillIntellegencePlatform" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend/skillRoute-backend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5c318941-3ae0-47d2-b6c1-212da1e5b6a5" name="Changes" comment="" />
+      <created>1784394768434</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1784394768434</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SkillRoute$SkillIntellegencePlatformApplication.ic" NAME="SkillIntellegencePlatformApplication Coverage Results" MODIFIED="1784396543792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.example.skillIntellegencePlatform.*</FILTER>
+    </SUITE>
+  </component>
+</project>
