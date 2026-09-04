@@ -13,6 +13,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         // For microservices, we'll accept any valid JWT token
         // The actual validation is done by the JWT filter
         return new User(username, "", new ArrayList<>());
