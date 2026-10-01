@@ -1,4 +1,4 @@
-package com.example.auth_service.service;
+package com.example.auth_service.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,14 +21,13 @@ public class JwtService {
     private String SECRETKEY;
 
     public String generateToken(String email) {
-
         Map<String, Object> claims = new HashMap<>();
         return Jwts.builder()
                 .claims()
                 .add(claims)
                 .subject(email)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60))
+                .expiration(new Date(System.currentTimeMillis() + 1000L * 60 * 60 * 24))
                 .and()
                 .signWith(getSecretKey())
                 .compact();
@@ -55,7 +55,12 @@ public class JwtService {
     }
 
     private Key getSecretKey() {
-        byte[] base64 = Decoders.BASE64.decode(SECRETKEY);
-        return Keys.hmacShaKeyFor(base64);
+        byte[] keyBytes;
+        try {
+            keyBytes = Decoders.BASE64.decode(SECRETKEY);
+        } catch (Exception e) {
+            keyBytes = SECRETKEY.getBytes(StandardCharsets.UTF_8);
+        }
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 }
