@@ -1,0 +1,170 @@
+services:
+  redis-insight:
+    image: redis/redisinsight
+    container_name: redis_insight_container
+    ports:
+      - "5540:5540"
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    container_name: redis_container
+
+  eureka-server:
+    build:
+      context: ./backend/eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - APPLICATION_NAME=eureka-server
+      - SERVER_PORT=8761
+      - REGISTER_WITH_EUREKA=false
+      - FETCH_REGISTRY=false
+    volumes:
+    - ./.env:/app/.env
+
+  skillroute-api-gateway:
+    build:
+      context: ./backend/skillroute-api-gateway
+    container_name: skillroute-api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - APPLICATION_NAME=api-gateway
+      - SERVER_PORT=8080
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+    volumes:
+    - ./.env:/app/.env
+
+  auth-service:
+    build:
+      context: ./backend/auth-service
+    container_name: auth-service
+    ports:
+      - "8081:8081"
+    environment:
+      - APPLICATION_NAME=auth-service
+      - SERVER_PORT=8081
+    depends_on:
+      - eureka-server
+    volumes:
+    - ./.env:/app/.env
+
+  user-details-service:
+    build:
+      context: ./backend/user-details-service
+    container_name: user-details-service
+    ports:
+      - "8082:8082"
+    environment:
+      - APPLICATION_NAME=user-details-service
+      - SERVER_PORT=8082
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+    depends_on:
+      - eureka-server
+    volumes:
+    - ./.env:/app/.env
+
+  activity-service:
+    build:
+      context: ./backend/activity-service
+    container_name: activity-service
+    ports:
+      - "8083:8083"
+    environment:
+      - APPLICATION_NAME=activity-service
+      - SERVER_PORT=8083
+    depends_on:
+      - eureka-server
+    volumes:
+    - ./.env:/app/.env
+
+  ai-service:
+    build:
+      context: ./backend/ai-service
+    container_name: ai-service
+    ports:
+      - "8084:8084"
+    environment:
+      - APPLICATION_NAME=ai-service
+      - SERVER_PORT=8084
+    depends_on:
+      - eureka-server
+    volumes:
+    - ./.env:/app/.env
+
+  career-path-service:
+    build:
+      context: ./backend/career-path-service
+    container_name: career-path-service
+    ports:
+      - "8085:8085"
+    environment:
+      - APPLICATION_NAME=career-path-service
+      - SERVER_PORT=8085
+    depends_on:
+      - eureka-server
+    volumes:
+    - ./.env:/app/.env
+
+  dashboard-service:
+    build:
+      context: ./backend/dashboard-service
+    container_name: dashboard-service
+    ports:
+      - "8086:8086"
+    environment:
+      - APPLICATION_NAME=dashboard-service
+      - SERVER_PORT=8086
+    depends_on:
+      - eureka-server
+    volumes:
+    - ./.env:/app/.env
+
+  search-service:
+    build:
+      context: ./backend/search-service
+    container_name: search-service
+    ports:
+      - "8087:8087"
+    environment:
+      - APPLICATION_NAME=search-service
+      - SERVER_PORT=8087
+    depends_on:
+      - eureka-server
+    volumes:
+    - ./.env:/app/.env
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - skillroute-api-gateway
+
+  mysql:
+    image: mysql:8.4
+    container_name: skillroute-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: skill_route
+      MYSQL_USER: harish
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    ports:
+      - "3307:8080"
+volumes:
+  mysql-data:

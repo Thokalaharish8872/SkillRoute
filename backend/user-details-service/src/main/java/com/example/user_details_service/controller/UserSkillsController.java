@@ -8,6 +8,8 @@ import com.example.user_details_service.entity.requests.AddSkillRequest;
 import com.example.user_details_service.entity.requests.RemoveSkillRequest;
 import com.example.user_details_service.service.UserSkillsService;
 import org.hibernate.Remove;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/skills")
 public class UserSkillsController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserSkillsController.class);
 
     @GetMapping("/health")
     public String health(){
@@ -26,19 +29,48 @@ public class UserSkillsController {
     @Autowired
     UserSkillsService service;
 
+    @Autowired
+    com.example.user_details_service.security.JwtService jwtService;
+
     @PostMapping("/add_skill")
-    public AddSkillResponse addSkill(@RequestBody AddSkillRequest request) throws Exception {
-        System.out.println("called");
+    public GetSkillsResponse addSkill(
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestBody AddSkillRequest request) throws Exception {
+        if (request.getUserId() == 0 && authHeader != null) {
+            Integer extracted = jwtService.extractUserId(authHeader);
+            if (extracted != null) {
+                request.setUserId(extracted);
+            }
+        }
+        logger.info("received request to add new skill to userId : {}", request.getUserId());
         return service.addSkill(request);
     }
 
     @GetMapping("/get_user_skills")
-    public GetSkillsResponse getUserSkills(@RequestParam int userId) throws Exception{
+    public GetSkillsResponse getUserSkills(
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestParam(required = false) Integer userId) throws Exception{
+        if (userId == null && authHeader != null) {
+            userId = jwtService.extractUserId(authHeader);
+        }
+        if (userId == null) {
+            userId = 1;
+        }
+        logger.info("Received get_user_skills request for userId: {}", userId);
         return service.getUserSkills(userId);
     }
 
     @DeleteMapping("/remove_skill")
-    public RemoveSkillsResponse removeUserSkill(@RequestBody RemoveSkillRequest request){
+    public GetSkillsResponse removeUserSkill(
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestBody RemoveSkillRequest request){
+        if (request.getUserId() == 0 && authHeader != null) {
+            Integer extracted = jwtService.extractUserId(authHeader);
+            if (extracted != null) {
+                request.setUserId(extracted);
+            }
+        }
+        logger.info("Received remove_skills request for userId: {}", request.getUserId());
         return service.removeUserSkill(request.getUserId(), request.getSkillName());
     }
 }

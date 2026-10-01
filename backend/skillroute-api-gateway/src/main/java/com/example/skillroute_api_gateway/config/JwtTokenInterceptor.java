@@ -4,13 +4,11 @@ import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@Component
 public class JwtTokenInterceptor implements RequestInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenInterceptor.class);

@@ -1,17 +1,23 @@
 package com.example.user_details_service.service;
 
 import com.example.user_details_service.repository.ProfileRepo;
+import com.example.user_details_service.entity.CodingProfiles;
 import com.example.user_details_service.entity.Profile;
 import com.example.user_details_service.entity.Response.ProfileResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class ProfileService {
 
     @Autowired
     ProfileRepo repo;
 
+    @Cacheable(value = "user_profile", key = "#userId")
     public ProfileResponse getProfile(int userId) throws Exception {
 
         Profile profile = repo.findByUserId(userId);
@@ -27,12 +33,12 @@ public class ProfileService {
                                     profile.getCodingProfiles());
     }
 
-    public void updateProfile(Profile profile) throws Exception {
+    @CachePut(value = "user_profile", key = "#profile.getUserId()")
+    public ProfileResponse updateProfile(Profile profile) throws Exception {
         Profile profile1 = repo.findByUserId(profile.getUserId());
 
         if(profile1 == null){
-            createProfile(profile);
-            return;
+            return createProfile(profile);
         }
 
         if(profile.getUserName() != null)
@@ -46,11 +52,38 @@ public class ProfileService {
         if(profile.getCodingProfiles() != null)
             profile1.setCodingProfiles(profile.getCodingProfiles());
 
-        repo.save(profile1);
+        Profile saved = repo.save(profile1);
+        return new ProfileResponse(saved.getUserId(),
+                                    saved.getUserName(),
+                                    saved.getEmail(),
+                                    saved.getRole(),
+                                    saved.getLocation(),
+                                    saved.getCodingProfiles());
     }
 
-    public void createProfile(Profile profile){
-        repo.save(profile);
+    @CachePut(value = "user_profile", key = "#profile.getUserId()")
+    public ProfileResponse createProfile(Profile profile) throws Exception {
+        Profile existing = repo.findByUserId(profile.getUserId());
+        if (existing != null) {
+            return updateProfile(profile);
+        }
+
+        if (profile.getCodingProfiles() == null) {
+            CodingProfiles defaultCoding = new CodingProfiles();
+            defaultCoding.setLeetcode("");
+            defaultCoding.setGithub("");
+            defaultCoding.setCodechef("");
+            defaultCoding.setCodeforces("");
+            profile.setCodingProfiles(defaultCoding);
+        }
+
+        Profile saved = repo.save(profile);
+        return new ProfileResponse(saved.getUserId(),
+                                    saved.getUserName(),
+                                    saved.getEmail(),
+                                    saved.getRole(),
+                                    saved.getLocation(),
+                                    saved.getCodingProfiles());
     }
 }
 

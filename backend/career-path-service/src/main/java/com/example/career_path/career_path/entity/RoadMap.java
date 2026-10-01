@@ -17,6 +17,7 @@ public class RoadMap {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private int roleId;
     private String title;
     private String description;
 

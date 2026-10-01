@@ -1,7 +1,7 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import axios from "axios";
-
 import { X, Plus } from 'lucide-react';
+import { getUserIdFromToken } from '../utils/api';
 
 interface SkillInputProps {
   skills: string[];
@@ -11,54 +11,49 @@ interface SkillInputProps {
 export function SkillInput({ skills, onSkillsChange }: SkillInputProps) {
   const [inputValue, setInputValue] = useState('');
 
-
   const addSkill = async () => {
     if (inputValue.trim() && !skills.includes(inputValue.trim())) {
-      
       const newSkill = inputValue.trim();
       setInputValue('');
       onSkillsChange([...skills, newSkill]);
       sessionStorage.removeItem('recommendedRoles');
 
       try {
-            const response = await axios.post(
-                "http://localhost:8080/api/skills/add_skill",
-                {
-                    userId: 1,
-                    skillName: newSkill
-                }
-            );
-
-        } catch (error) {
-            console.error(error);
-        }
+        await axios.post(
+          "http://localhost:8080/api/skills/add_skill",
+          {
+            userId: getUserIdFromToken(),
+            skillName: newSkill,
+          }
+        );
+      } catch (error) {
+        console.error('Failed to add skill:', error);
+      }
     }
   };
 
-    const removeSkill = async (skillToRemove: string) => {
+  const removeSkill = async (skillToRemove: string) => {
     try {
-
       const response = await axios.delete(
         "http://localhost:8080/api/skills/remove_skill",
         {
-          params: {
-            userId: 1,
-            skillName: skillToRemove
-          }
+          data: {
+            userId: getUserIdFromToken(),
+            skillName: skillToRemove,
+          },
         }
       );
 
-      if(response.data.httpStatusCode === 200){
+      if (response.status === 200) {
         onSkillsChange(
-          skills.filter(skill => skill !== skillToRemove)
+          response.data.skills || skills.filter(skill => skill !== skillToRemove)
         );
         sessionStorage.removeItem('recommendedRoles');
       } else {
-        console.error(response.data.result);
+        console.error("Failed to remove skill");
       }
-
-    } catch(error) {
-      console.error(error);
+    } catch (error) {
+      console.error('Failed to remove skill:', error);
     }
   };
 

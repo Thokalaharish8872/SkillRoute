@@ -1,9 +1,11 @@
 package com.example.skillroute_api_gateway.controller;
 
 import com.example.skillroute_api_gateway.dto.CareerPath;
+import com.example.skillroute_api_gateway.dto.Module;
 import com.example.skillroute_api_gateway.dto.ModuleResponse;
 import com.example.skillroute_api_gateway.dto.Phases;
 import com.example.skillroute_api_gateway.dto.RoadMapResponse;
+import com.example.skillroute_api_gateway.dto.request.RoadMapRequest;
 import com.example.skillroute_api_gateway.dto.response.CareerPathResponse;
 import com.example.skillroute_api_gateway.client.CareerPathClient;
 import org.slf4j.Logger;
@@ -22,7 +24,6 @@ public class CareerPathGatewayController {
     @Autowired
     private CareerPathClient careerPathClient;
 
-    // Career Path Endpoints
     @PostMapping("/api/career_path/add_career_path")
     public CareerPath addCareerPath(@RequestBody CareerPath request) {
         logger.info("Received add_career_path request");
@@ -36,13 +37,13 @@ public class CareerPathGatewayController {
     }
 
     @GetMapping("/api/career_path/recommendations")
-    public CareerPathResponse getRecommendations(@RequestParam int userId, @RequestParam(required = false, defaultValue = "false") boolean refresh) {
+    public CareerPathResponse getRecommendations(@RequestParam(required = false) Integer userId, @RequestParam(required = false, defaultValue = "false") boolean refresh) throws Exception{
         logger.info("Received get_recommendations request for userId: {}, refresh: {}", userId, refresh);
         return careerPathClient.getRecommendations(userId, refresh);
     }
 
     @GetMapping("/api/career_path/regenerate")
-    public CareerPathResponse regenerateRecommendations(@RequestParam int userId) {
+    public CareerPathResponse regenerateRecommendations(@RequestParam(required = false) Integer userId) throws Exception{
         logger.info("Received regenerate_recommendations request for userId: {}", userId);
         return careerPathClient.regenerateRecommendations(userId);
     }
@@ -61,25 +62,28 @@ public class CareerPathGatewayController {
     }
 
     @PostMapping("/api/roadmap/get_roadmap")
-    public RoadMapResponse getRoadMap(@RequestBody Object request) {
-        logger.info("Received get_roadmap request");
-        return careerPathClient.getRoadMap(request);
+    public Object getRoadMap(@RequestBody RoadMapRequest request) {
+        logger.info("Received get_roadmap request for roleTitle: {}", request.getRoleTitle());
+        Object response = careerPathClient.getRoadMap(request.getRoleTitle());
+        logger.info("response : {}", response);
+        return response;
     }
 
     // Module Endpoints
     @GetMapping("/api/modules/get_module")
     public ModuleResponse getModule(@RequestParam int moduleId) {
         logger.info("Received get_module request for moduleId: {}", moduleId);
-        return careerPathClient.getModule(moduleId);
+        ModuleResponse response = careerPathClient.getModule(moduleId);
+        logger.info("returning response for get_module : {}", response);
+        return response;
     }
 
     @GetMapping("/api/modules/search")
-    public List<CareerPath> searchModules(@RequestParam String keyword) {
+    public List<Module> searchModules(@RequestParam String keyword) {
         logger.info("Received search_modules request for keyword: {}", keyword);
         return careerPathClient.searchModules(keyword);
     }
 
-    // Phases Endpoints
     @GetMapping("/api/phases/get_phase")
     public Phases getPhase(@RequestParam int moduleId) {
         logger.info("Received get_phase request for moduleId: {}", moduleId);

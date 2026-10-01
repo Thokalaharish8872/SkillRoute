@@ -1,7 +1,16 @@
-import { Search, Bell, Flame, Code, BookOpen, Target, Loader2, GraduationCap, Layers } from 'lucide-react';
+import { Search, Bell, Flame, Code, BookOpen, Target, Loader2, GraduationCap, Layers, LogOut, User } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -161,6 +170,12 @@ function typeIconBg(type: string): string {
 
 export function Header({ streak }: { streak: number | string }) {
   const navigate = useNavigate();
+  const { email, logout } = useAuth();
+
+  const handleLogout = useCallback(() => {
+    logout();
+    navigate('/auth');
+  }, [logout, navigate]);
 
   const [query, setQuery]         = useState('');
   const [results, setResults]     = useState<SearchResult[]>([]);
@@ -392,17 +407,43 @@ export function Header({ streak }: { streak: number | string }) {
           <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white shadow-sm" />
         </button>
 
-        {/* Avatar → profile */}
-        <Link
-          to="/profile"
-          className="w-9 h-9 bg-gradient-to-tr from-blue-600 to-indigo-600
-                     hover:from-blue-700 hover:to-indigo-700
-                     shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all
-                     rounded-full flex items-center justify-center
-                     text-white text-xs font-bold tracking-wide border-2 border-white"
-        >
-          JD
-        </Link>
+        {/* Avatar Dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              className="w-9 h-9 bg-gradient-to-tr from-blue-600 to-indigo-600
+                         hover:from-blue-700 hover:to-indigo-700
+                         shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all
+                         rounded-full flex items-center justify-center
+                         text-white text-xs font-bold tracking-wide border-2 border-white focus:outline-none cursor-pointer"
+              title="User Account"
+            >
+              {email ? email.substring(0, 2).toUpperCase() : 'U'}
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56 bg-white rounded-xl shadow-lg border border-slate-200 p-1">
+            <DropdownMenuLabel className="px-3 py-2">
+              <div className="text-xs text-slate-500 font-normal">Signed in as</div>
+              <div className="text-sm font-semibold text-slate-800 truncate">{email || 'User'}</div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator className="bg-slate-100" />
+            <DropdownMenuItem
+              onClick={() => navigate('/profile')}
+              className="cursor-pointer flex items-center gap-2 px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 rounded-md"
+            >
+              <User size={16} />
+              <span>My Profile</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-slate-100" />
+            <DropdownMenuItem
+              onClick={handleLogout}
+              className="cursor-pointer flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md font-medium"
+            >
+              <LogOut size={16} />
+              <span>Logout</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );

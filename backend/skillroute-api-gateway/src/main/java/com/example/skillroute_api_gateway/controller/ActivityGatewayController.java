@@ -27,19 +27,19 @@ public class ActivityGatewayController {
     }
 
     @GetMapping("/api/progress/get_progress")
-    public ProgressResponse getProgress(@RequestParam int userId) {
+    public ProgressResponse getProgress(@RequestParam(required = false) Integer userId) throws Exception{
         logger.info("Received get_progress request for userId: {}", userId);
         return activityClient.getProgress(userId);
     }
 
     @PostMapping("/api/streak/update_streak")
-    public void updateStreak(@RequestParam int userId) {
+    public void updateStreak(@RequestParam(required = false) Integer userId) {
         logger.info("Received update_streak request for userId: {}", userId);
         activityClient.updateStreak(userId);
     }
 
     @GetMapping("/api/streak/get_streak")
-    public int getStreak(@RequestParam int userId) {
+    public int getStreak(@RequestParam(required = false) Integer userId) {
         logger.info("Received get_streak request for userId: {}", userId);
         return activityClient.getStreak(userId);
     }
@@ -51,7 +51,7 @@ public class ActivityGatewayController {
     }
 
     @GetMapping("/api/activity/get_recent_activity")
-    public UserActivity getRecentActivity(@RequestParam int userId) {
+    public UserActivity getRecentActivity(@RequestParam(required = false) Integer userId) {
         logger.info("Received get_recent_activity request for userId: {}", userId);
         return activityClient.getRecentActivity(userId);
     }

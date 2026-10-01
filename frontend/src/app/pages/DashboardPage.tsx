@@ -1,43 +1,60 @@
-import { TrendingUp, Target, Award, BookOpen, Flame, Loader2 } from 'lucide-react';
+import { TrendingUp, Target, Award, Flame, Loader2 } from 'lucide-react';
 import { Link } from 'react-router';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getUserIdFromToken } from '../utils/api';
 
 interface Activity {
+  id?: number;
+  activityType?: string;
   title: string;
+  skillName?: string;
   createdAt: string;
-  type?: string;
+}
+
+interface DashboardData {
+  userId?: number;
+  streak: number;
+  skillsMasteredCount: number;
+  careerMatchesCount: number;
+  recentActivities: Activity[];
 }
 
 export function DashboardPage() {
-  const [streak, setStreak] = useState<number | string>('-');
-  const [recentActivity, setRecentActivity] = useState<Activity[]>([]);
-  const [isLoadingActivity, setIsLoadingActivity] = useState(true);
+  const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
+  const [isLoading, setIsLoading]         = useState(true);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        // Fetch Streak
-        const streakRes = await axios.get('http://localhost:8080/api/streak/get_streak?userId=1');
-        setStreak(streakRes.data.streak !== undefined ? streakRes.data.streak : (streakRes.data || 0));
-        
-        // Fetch Recent Activity
-        const activityRes = await axios.get('http://localhost:8080/api/activity/get_recent_activity?userId=1');
-        setRecentActivity(Array.isArray(activityRes.data.recentActivities) ? activityRes.data.recentActivities : []);
+        setIsLoading(true);
+        const userId = getUserIdFromToken();
+        const response = await axios.get<DashboardData>(
+          'http://localhost:8080/api/dashboard/get_dashboard_data',
+          {
+            params: userId ? { userId } : {},
+          }
+        );
+        setDashboardData(response.data);
       } catch (error) {
         console.error('Failed to fetch dashboard data:', error);
       } finally {
-        setIsLoadingActivity(false);
+        setIsLoading(false);
       }
     };
-    
+
     fetchDashboardData();
   }, []);
 
+  const streak              = dashboardData?.streak ?? 0;
+  const skillsMasteredCount = dashboardData?.skillsMasteredCount ?? 0;
+  const careerMatchesCount  = dashboardData?.careerMatchesCount ?? 0;
+  const recentActivities    = dashboardData?.recentActivities ?? [];
+
   const stats = [
-    { label: 'Day Streak', value: `${streak}`, icon: Flame, color: 'bg-orange-500', link: '#' },
-    { label: 'Skills Mastered', value: '5', icon: Award, color: 'bg-blue-500', link: '/skills' },
-    { label: 'Career Matches', value: '4', icon: Target, color: 'bg-green-500', link: '/careers' },
+    { label: 'Day Streak',       value: `${streak}`,              icon: Flame,  color: 'bg-orange-500', link: '/progress' },
+    { label: 'Skills Mastered',  value: `${skillsMasteredCount}`, icon: Award,  color: 'bg-blue-500',   link: '/skills'   },
+    { label: 'Career Matches',   value: `${careerMatchesCount}`,  icon: Target, color: 'bg-green-500',  link: '/careers'  },
   ];
 
   return (
@@ -48,7 +65,7 @@ export function DashboardPage() {
           <p className="text-gray-600">Here's your learning progress overview</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stats.map((stat) => {
             const Icon = stat.icon;
             return (
@@ -62,7 +79,9 @@ export function DashboardPage() {
                     <Icon className="text-white" size={24} />
                   </div>
                 </div>
-                <p className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</p>
+                <p className="text-3xl font-bold text-gray-900 mb-1">
+                  {isLoading ? <Loader2 className="w-6 h-6 animate-spin text-gray-400" /> : stat.value}
+                </p>
                 <p className="text-sm text-gray-600">{stat.label}</p>
               </Link>
             );
@@ -72,16 +91,19 @@ export function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Recent Activity</h2>
-            
-            {isLoadingActivity ? (
+
+            {isLoading ? (
               <div className="flex flex-col items-center justify-center py-8 text-gray-400">
                 <Loader2 className="w-8 h-8 animate-spin mb-2 text-blue-500" />
                 <p className="text-sm">Loading activity...</p>
               </div>
-            ) : recentActivity.length > 0 ? (
+            ) : recentActivities.length > 0 ? (
               <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2">
-                {recentActivity.map((activity, index) => (
-                  <div key={index} className="flex items-start gap-3 pb-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors p-2 rounded-lg -mx-2">
+                {recentActivities.map((activity, index) => (
+                  <div
+                    key={activity.id || index}
+                    className="flex items-start gap-3 pb-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors p-2 rounded-lg -mx-2"
+                  >
                     <div className="w-2.5 h-2.5 bg-blue-500 rounded-full mt-1.5 shadow-sm shadow-blue-200"></div>
                     <div className="flex-1">
                       <p className="text-gray-800 font-medium">{activity.title}</p>

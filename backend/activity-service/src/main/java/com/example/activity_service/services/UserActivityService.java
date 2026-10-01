@@ -7,12 +7,16 @@ import com.example.activity_service.models.*;
 import com.example.activity_service.models.Response.ActivityResponse;
 import com.example.activity_service.models.requests.UserActivityRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Service
+@Transactional
 public class UserActivityService {
 
     @Autowired
@@ -24,6 +28,7 @@ public class UserActivityService {
     @Autowired
     UserMapper mapper;
 
+    @CachePut(value = "recent_activity", key = "#request.getUserId()")
     public ActivityResponse updateActivity(UserActivityRequest request) {
         int userId = request.getUserId();
         int skillId = request.getSkillId();
@@ -52,6 +57,7 @@ public class UserActivityService {
 
     }
 
+    @Cacheable(value = "recent_activity", key = "#userId")
     public UserActivityResponse getRecentActivity(int userId) {
         return mapper.toDto(repo.getReferenceById(userId));
     }

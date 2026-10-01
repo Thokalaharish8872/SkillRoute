@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const API_BASE_URL = "http://localhost:8080";
 
 /**
@@ -13,6 +15,22 @@ export const isTokenExpired = (token: string): boolean => {
     return true; // Assume expired if we can't check
   }
 };
+
+/**
+ * Decode the JWT stored in localStorage and return the userId claim.
+ * Returns 0 if the token is missing or cannot be decoded.
+ */
+export const getUserIdFromToken = (): number => {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) return 0;
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.userId ?? 0;
+  } catch {
+    return 0;
+  }
+};
+
 
 /**
  * Show toast notification for token expiration
@@ -37,6 +55,42 @@ const showTokenExpiredMessage = () => {
     setTimeout(() => toast.remove(), 300);
   }, 3000);
 };
+
+// Global Axios Request Interceptor to include JWT token with every request
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      if (isTokenExpired(token)) {
+        console.log('Token expired in axios interceptor, logging out user');
+        showTokenExpiredMessage();
+        localStorage.removeItem("token");
+        localStorage.removeItem("email");
+        window.location.href = "/auth";
+        return Promise.reject(new Error("Token expired"));
+      }
+      config.headers = config.headers || {};
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Global Axios Response Interceptor to handle 401 Unauthorized
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      console.log('Received 401 response in axios interceptor, logging out user');
+      showTokenExpiredMessage();
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      window.location.href = "/auth";
+    }
+    return Promise.reject(error);
+  }
+);
 
 /**
  * Make API call with automatic token expiration handling

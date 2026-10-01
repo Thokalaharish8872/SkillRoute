@@ -20,8 +20,11 @@ public class JwtService {
     @Value("${jwt.super.secret.key}")
     private String SECRETKEY;
 
-    public String generateToken(String email) {
+    public String generateToken(String email, Integer userId) {
         Map<String, Object> claims = new HashMap<>();
+        if (userId != null) {
+            claims.put("userId", userId);
+        }
         return Jwts.builder()
                 .claims()
                 .add(claims)
@@ -31,6 +34,10 @@ public class JwtService {
                 .and()
                 .signWith(getSecretKey())
                 .compact();
+    }
+
+    public String generateToken(String email) {
+        return generateToken(email, null);
     }
 
     public String extractEmail(String token) {

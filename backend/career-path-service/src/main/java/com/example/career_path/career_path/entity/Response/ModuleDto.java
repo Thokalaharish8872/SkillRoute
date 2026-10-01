@@ -1,4 +1,4 @@
-package com.example.ai_service.dto;
+package com.example.career_path.career_path.entity.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

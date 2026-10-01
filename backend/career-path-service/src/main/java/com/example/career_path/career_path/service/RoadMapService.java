@@ -48,17 +48,24 @@ public class RoadMapService {
 
         logger.info("Generating RoadMap with AI");
         RoadMapResponse aiResponse = aiClient.generateRoadMap(new GenerateRoadMapRequest(roleTitle));
+
+        logger.info("response : {}", aiResponse);
+
         if (aiResponse == null) {
             return null;
         }
+
         ObjectMapper mapper = new ObjectMapper();
         RoadMap generated = mapper.convertValue(aiResponse, RoadMap.class);
-        RoadMap response = roadMapRepo.save(generated);
+        RoadMap saved = roadMapRepo.save(generated);
 
-        return new RoadMapResponse(response.getId(),
-                response.getTitle(),
-                response.getDescription(),
-                response.getTotalPhases(),
-                response.getPhases());
+        // Return from the saved entity so real DB-generated IDs (phases, modules) flow back to frontend
+        return new RoadMapResponse(
+                saved.getId(),
+                saved.getTitle(),
+                saved.getDescription(),
+                saved.getTotalPhases(),
+                saved.getPhases()
+        );
     }
 }

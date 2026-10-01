@@ -19,17 +19,17 @@ public interface ActivityClient {
     void updateActiveTime(@RequestBody ProgressUpdateRequest request);
 
     @GetMapping("/api/progress/get_progress")
-    ProgressResponse getProgress(@RequestParam("userId") int userId);
+    ProgressResponse getProgress(@RequestParam(value = "userId", required = false) Integer userId) throws Exception;
 
     @PostMapping("/api/streak/update_streak")
-    void updateStreak(@RequestParam("userId") int userId);
+    void updateStreak(@RequestParam(value = "userId", required = false) Integer userId);
 
     @GetMapping("/api/streak/get_streak")
-    int getStreak(@RequestParam("userId") int userId);
+    int getStreak(@RequestParam(value = "userId", required = false) Integer userId);
 
     @PostMapping("/api/activity/update_activity")
     ActivityResponse updateActivity(@RequestBody UserActivityRequest request);
 
     @GetMapping("/api/activity/get_recent_activity")
-    UserActivity getRecentActivity(@RequestParam("userId") int userId);
+    UserActivity getRecentActivity(@RequestParam(value = "userId", required = false) Integer userId);
 }

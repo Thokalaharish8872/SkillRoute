@@ -18,7 +18,6 @@ public class ModuleService {
     @Autowired
     ModuleRepo repo;
 
-
     @Autowired
     SkillsService skillsService;
 

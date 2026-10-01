@@ -5,8 +5,10 @@ import com.example.user_details_service.dto.UserDetailsResponse;
 import com.example.user_details_service.entity.UserDetails;
 import com.example.user_details_service.repository.UserDetailsRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserDetailsService {
 
     private final UserDetailsRepo repo;
@@ -21,8 +23,8 @@ public class UserDetailsService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         return new UserDetailsResponse(
-                user.getSkills(),
-                user.getCareerPaths()
+                user.getSkills() != null ? new java.util.ArrayList<>(user.getSkills()) : new java.util.ArrayList<>(),
+                user.getCareerPaths() != null ? new java.util.ArrayList<>(user.getCareerPaths()) : new java.util.ArrayList<>()
         );
     }
 

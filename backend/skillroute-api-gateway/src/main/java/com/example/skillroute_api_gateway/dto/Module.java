@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Module {
-    private int id;
+
+    private Integer id;
+    private Integer durationWeeks;
     private String title;
-    private String description;
-    private int phaseId;
+    private List<String> skills;
 }

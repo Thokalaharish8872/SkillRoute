@@ -2,6 +2,7 @@ package com.example.skillroute_api_gateway.client;
 
 import com.example.skillroute_api_gateway.config.FeignConfiguration;
 import com.example.skillroute_api_gateway.dto.request.AddSkillRequest;
+import com.example.skillroute_api_gateway.dto.request.Profile;
 import com.example.skillroute_api_gateway.dto.request.RemoveSkillRequest;
 import com.example.skillroute_api_gateway.dto.response.AddSkillResponse;
 import com.example.skillroute_api_gateway.dto.response.GetSkillsResponse;
@@ -17,11 +18,17 @@ public interface UserDetailsClient {
     AddSkillResponse addSkill(@RequestBody AddSkillRequest request);
 
     @GetMapping("/api/skills/get_user_skills")
-    GetSkillsResponse getUserSkills(@RequestParam("userId") int userId);
+    GetSkillsResponse getUserSkills(@RequestParam(value = "userId", required = false) Integer userId);
 
     @DeleteMapping("/api/skills/remove_skill")
     RemoveSkillsResponse removeUserSkill(@RequestBody RemoveSkillRequest request);
 
     @GetMapping("/api/profile/get_profile")
-    ProfileResponse getProfile(@RequestParam("userId") int userId);
+    ProfileResponse getProfile(@RequestParam(value = "userId", required = false) Integer userId);
+
+    @PostMapping("/api/profile/create_profile")
+    ProfileResponse createProfile(@RequestBody Profile request) throws Exception;
+
+    @PostMapping("/api/profile/update_profile")
+    ProfileResponse updateProfile(@RequestBody Profile request) throws Exception;
 }

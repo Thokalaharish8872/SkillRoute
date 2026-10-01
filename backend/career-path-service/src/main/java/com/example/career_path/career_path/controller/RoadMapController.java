@@ -21,7 +21,7 @@ public class RoadMapController {
     }
 
     @PostMapping("/get_roadmap")
-    public RoadMapResponse getRoadMap(@RequestBody RoadMapRequest request) throws Exception {
-        return service.getRoadMap(request);
+    public RoadMapResponse getRoadMap(@RequestBody String roleTitle) throws Exception {
+        return service.getRoadMap(roleTitle);
     }
 }

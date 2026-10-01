@@ -1,0 +1,18 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Node
+node_modules/
+dist/
+
+# Java / Maven
+target/
+
+# Spring Boot build artifacts
+BOOT-INF/

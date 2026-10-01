@@ -1,7 +1,12 @@
 package com.example.ai_service.service;
 
 import com.example.ai_service.dto.AiServiceResponse;
+import com.example.ai_service.dto.ModuleResponse;
+import com.example.ai_service.dto.RoadMapDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
@@ -12,6 +17,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +28,9 @@ public class GeminiService {
     private String apiKey;
 
     private final ObjectMapper mapper = new ObjectMapper();
+    private static final Logger logger = LoggerFactory.getLogger(GeminiService.class);
 
+    @Cacheable(value = "ai_recommendations", key = "#skills")
     public AiServiceResponse generateRecommendations(Set<String> skills) throws Exception {
         String prompt = """
                     You are a career advisor.
@@ -95,7 +103,7 @@ public class GeminiService {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(
-                        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key="
+                        "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key="
                                 + apiKey))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(body))
@@ -109,7 +117,8 @@ public class GeminiService {
         return response.body();
     }
 
-    public AiServiceResponse generateRoadMap(String roleTitle) throws Exception {
+    @Cacheable(value = "ai_roadmaps", key = "#roleTitle")
+    public RoadMapDto generateRoadMap(String roleTitle) throws Exception {
 
         String prompt = """
             Create a detailed learning roadmap for %s.
@@ -178,11 +187,14 @@ public class GeminiService {
         String response = generateContent(prompt);
         System.out.println(response);
         String text = extractResponse(response);
-
-        return mapper.readValue(text, AiServiceResponse.class) ;
+        System.out.println("this is text : \n" + text);
+        RoadMapDto roadmapObj = mapper.readValue(text, RoadMapDto.class);
+        System.out.println("this is the response returned : \n" + roadmapObj);
+        return roadmapObj;
     }
 
-    public Object generateSkillResource(List<String> skills) throws Exception {
+    @Cacheable(value = "ai_skill_resources", key = "#skills")
+    public List<ModuleResponse> generateSkillResource(List<String> skills) throws Exception {
         String prompt = """
             Generate information for the skills: %s
             
@@ -223,10 +235,8 @@ public class GeminiService {
         String text = extractResponse(response);
         System.out.println(response);
 
-        return
-                mapper.readValue(
-                        text,
-                        Object.class
-                );
+        List<ModuleResponse> moduleResponses = Arrays.asList(mapper.readValue(text, ModuleResponse[].class));
+        logger.info("module response : {}", moduleResponses);
+        return moduleResponses;
     }
 }

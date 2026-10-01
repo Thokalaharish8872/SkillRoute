@@ -2,6 +2,7 @@ package com.example.skillroute_api_gateway.controller;
 
 import com.example.skillroute_api_gateway.client.UserDetailsClient;
 import com.example.skillroute_api_gateway.dto.request.AddSkillRequest;
+import com.example.skillroute_api_gateway.dto.request.Profile;
 import com.example.skillroute_api_gateway.dto.request.RemoveSkillRequest;
 import com.example.skillroute_api_gateway.dto.response.AddSkillResponse;
 import com.example.skillroute_api_gateway.dto.response.GetSkillsResponse;
@@ -28,7 +29,7 @@ public class UserDetailsGatewayController {
     }
 
     @GetMapping("/api/skills/get_user_skills")
-    public GetSkillsResponse getUserSkills(@RequestParam int userId) {
+    public GetSkillsResponse getUserSkills(@RequestParam(required = false) Integer userId) {
         logger.info("Received get_user_skills request for userId: {}", userId);
         return userDetailsClient.getUserSkills(userId);
     }
@@ -40,8 +41,20 @@ public class UserDetailsGatewayController {
     }
 
     @GetMapping("/api/profile/get_profile")
-    public ProfileResponse getProfile(@RequestParam int userId) {
+    public ProfileResponse getProfile(@RequestParam(required = false) Integer userId) {
         logger.info("Received get_profile request for userId: {}", userId);
         return userDetailsClient.getProfile(userId);
+    }
+
+    @PostMapping("/api/profile/create_profile")
+    public ProfileResponse createProfile(@RequestBody Profile request) throws Exception {
+        logger.info("received create_profile request for userId : {}", request.getUserId());
+        return userDetailsClient.createProfile(request);
+    }
+
+    @PostMapping("/api/profile/update_profile")
+    public ProfileResponse updateProfile(@RequestBody Profile request) throws Exception {
+        logger.info("received update_profile request for userId : {}", request.getUserId());
+        return userDetailsClient.updateProfile(request);
     }
 }

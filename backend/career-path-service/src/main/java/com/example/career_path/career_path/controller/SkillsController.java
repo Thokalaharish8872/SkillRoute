@@ -19,5 +19,15 @@ public class SkillsController {
     public List<Skills> searchSkills(@RequestParam String keyword) {
         return service.searchSkills(keyword);
     }
+
+    /**
+     * Accepts a list of skill names, fetches from DB or generates via AI for missing ones,
+     * and returns full skill details (docs, videos, difficulty, etc.)
+     */
+    @PostMapping("/generate")
+    public List<Skills> generateSkills(@RequestBody List<String> skillNames) throws Exception {
+        return service.identifyMissingSkillsAndGenerate(skillNames);
+    }
 }
+
 

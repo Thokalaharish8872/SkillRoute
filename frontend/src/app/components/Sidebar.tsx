@@ -1,8 +1,16 @@
-import { LayoutDashboard, Award, Target, Lightbulb, TrendingUp, User } from 'lucide-react';
-import { Link, useLocation } from 'react-router';
+import { LayoutDashboard, Award, Target, TrendingUp, User, LogOut } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router';
+import { useAuth } from '../context/AuthContext';
 
 export function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/auth');
+  };
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/' },
@@ -38,6 +46,16 @@ export function Sidebar() {
           );
         })}
       </nav>
+      <div className="p-4 border-t border-gray-200">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition-colors cursor-pointer font-medium text-sm"
+        >
+          <LogOut size={20} />
+          <span>Logout</span>
+        </button>
+      </div>
     </div>
   );
 }
+

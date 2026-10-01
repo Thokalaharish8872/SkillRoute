@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
+import { useAuth } from '../context/AuthContext';
 import { 
   User, 
   Mail, 
@@ -14,7 +16,8 @@ import {
   Code2,
   Loader2,
   Save,
-  TerminalSquare
+  TerminalSquare,
+  LogOut
 } from 'lucide-react';
 
 // axios.defaults.withCredentials = true;
@@ -37,11 +40,18 @@ interface Profile {
 }
 
 export function ProfilePage() {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState<Profile | null>(null);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/auth');
+  };
 
   useEffect(() => {
     fetchProfile();
@@ -50,34 +60,22 @@ export function ProfilePage() {
   const fetchProfile = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:8080/api/profile/get_profile', {
-        params: { userId: 1 }
-      });
+      const response = await axios.get('http://localhost:8080/api/profile/get_profile');
       
       if (response.data) {
         const data = response.data;
-        response.data.userId = 1; // Ensure userId is set
         const profileData: Profile = {
           ...data,
           codingProfiles: data.codingProfiles || { leetcode: '', github: '', codechef: '', codeforces: '' }
         };
+        
         setProfile(profileData);
         setFormData(profileData);
       }
     } catch (error) {
       console.error('Failed to fetch profile', error);
-      
-      // Fallback for UI visualization if backend is missing
-      const fallback: Profile = {
-        userId: 1,
-        userName: 'Jane Doe',
-        email: 'jane.doe@example.com',
-        role: 'Full Stack Developer',
-        location: 'Remote',
-        codingProfiles: { leetcode: 'janedoe_lc', github: 'janedoe', codechef: 'janedoe_cc', codeforces: 'janedoe_cf' }
-      };
-      setProfile(fallback);
-      setFormData(fallback);
+      setProfile(null);
+      setFormData(null);
     } finally {
       setLoading(false);
     }
@@ -134,7 +132,7 @@ export function ProfilePage() {
     }
   };
 
-  if (loading || !profile || !formData) {
+  if (loading) {
     return (
       <div className="p-8 bg-gray-50 min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
@@ -144,6 +142,24 @@ export function ProfilePage() {
       </div>
     );
   }
+
+  if (!profile || !formData) {
+    return (
+      <div className="p-8 bg-gray-50 min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4 text-center">
+          <p className="text-gray-700 font-semibold text-xl">Profile not found</p>
+          <p className="text-gray-500">Could not load your profile. Please make sure you are logged in and try again.</p>
+          <button
+            onClick={fetchProfile}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
@@ -177,13 +193,22 @@ export function ProfilePage() {
               </button>
             </div>
           ) : (
-            <button 
-              onClick={() => setIsEditing(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm"
-            >
-              <Edit2 size={18} />
-              Edit Profile
-            </button>
+            <div className="flex items-center gap-3">
+              <button 
+                onClick={() => setIsEditing(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm cursor-pointer"
+              >
+                <Edit2 size={18} />
+                Edit Profile
+              </button>
+              <button 
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-2 border border-red-200 text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors shadow-sm cursor-pointer"
+              >
+                <LogOut size={18} />
+                Logout
+              </button>
+            </div>
           )}
         </div>
 

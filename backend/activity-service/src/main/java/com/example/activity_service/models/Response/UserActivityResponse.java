@@ -6,12 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserActivityResponse {
+public class UserActivityResponse implements Serializable {
 
     private Integer userId;
     private List<Activity> recentActivities;

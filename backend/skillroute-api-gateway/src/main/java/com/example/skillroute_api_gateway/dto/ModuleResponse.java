@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ModuleResponse {
+
     private Module module;
-    private List<Skill> skills;
+    private List<Skills> skills;
 }

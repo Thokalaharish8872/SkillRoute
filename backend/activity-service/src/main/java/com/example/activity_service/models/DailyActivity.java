@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
@@ -19,7 +20,7 @@ import java.time.LocalDate;
                 @UniqueConstraint(columnNames = {"user_id", "date"})
         }
 )
-public class DailyActivity {
+public class DailyActivity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

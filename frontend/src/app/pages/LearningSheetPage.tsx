@@ -20,7 +20,8 @@ import {
   Clock,
   Award,
   TrendingUp,
-  Info
+  Info,
+  User
 } from 'lucide-react';
 import { StreakModal } from '../components/StreakModal';
 
@@ -62,6 +63,7 @@ export function LearningSheetPage() {
   const moduleName = searchParams.get('moduleName') || 'Module';
   
   const moduleId = searchParams.get('moduleId');
+  const skillsParam = searchParams.get('skills');
 
   const [sheetData, setSheetData] = useState<SheetData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -77,7 +79,7 @@ export function LearningSheetPage() {
 
   useEffect(() => {
     // Fetch initial streak on mount
-    axios.post('http://localhost:8080/api/user/streak', { userId: 1 })
+    axios.get('http://localhost:8080/api/streak/get_streak')
       .then(res => setCurrentStreak(res.data.streak !== undefined ? res.data.streak : (res.data || 0)))
       .catch(console.error);
   }, []);
@@ -91,6 +93,32 @@ export function LearningSheetPage() {
       }
     }
   }, [sheetData]);
+
+  // Build sheet from skills list (when no moduleId / fallback)
+  const buildSheetFromSkills = (skillsList: string[], title: string) => {
+    const subTopics = [{
+      id: 'st_0_0',
+      title: 'Skills to Master',
+      problems: skillsList.map((skill, idx) => ({
+        id: `p_skill_${idx}`,
+        title: skill,
+        description: '',
+        difficulty: 'Medium',
+        estimatedHours: null,
+        documentationResource: '',
+        videoResource: [],
+        certificationUrl: '',
+        prerequisites: '',
+        demandLevel: ''
+      }))
+    }];
+    setSheetData({
+      title,
+      description: `Skills covered in this module.`,
+      topics: [{ id: 't_0', title: 'Module Overview', subTopics }]
+    });
+    setLoading(false);
+  };
 
   useEffect(() => {
     const fetchSheetData = async () => {
@@ -176,7 +204,7 @@ export function LearningSheetPage() {
     if (moduleId) {
       fetchSheetData();
     } else {
-      setError('No module ID provided in the URL. Please select a module to view its learning sheet.');
+      setError('No module ID provided. Please go back and select a module.');
       setLoading(false);
     }
   }, [moduleName, moduleId]);
@@ -190,34 +218,33 @@ export function LearningSheetPage() {
   };
 
   const toggleCompletion = async (id: string) => {
-    setCompletedProblems(prev => {
-      if (prev.includes(id)) {
-        return prev.filter(pId => pId !== id);
-      } else {
-        return [...prev, id];
-      }
-    });
+    const isCurrentlyCompleted = completedProblems.includes(id);
 
-    if (!completedProblems.includes(id)) {
+    // Optimistically update the checkbox state
+    setCompletedProblems(prev =>
+      isCurrentlyCompleted ? prev.filter(pId => pId !== id) : [...prev, id]
+    );
+
+    // Only fire the API & update streak when marking as DONE (not when unchecking)
+    if (!isCurrentlyCompleted) {
       try {
-        // Extract the actual integer skillId (e.g., from "p_64" -> 64)
+        // Extract numeric skillId: "p_64" → 64, "p_skill_0" → skip (no real DB id)
         const numericSkillId = parseInt(id.replace('p_', ''), 10);
-        
-        const response = await axios.post('http://localhost:8080/api/activity/update_activity', 
-          { 
-            userId: 1,
-            skillId: numericSkillId 
-          }
+
+        const response = await axios.post(
+          'http://localhost:8080/api/activity/update_activity',
+          { userId:0,
+            skillId: isNaN(numericSkillId) ? 0 : numericSkillId}
         );
-        
-        // Expecting ActivityResponse: { isFirstTask: boolean, streak: int }
-        const newStreak = response.data.streak || 0;
+
+        const newStreak = response.data.streak ?? 0;
         setCurrentStreak(newStreak);
-        
-        // Jackson may serialize boolean 'isFirstTask' as 'isFirstTask' or 'firstTask'
-        const isFirst = response.data.isFirstTask === true || response.data.firstTask === true;
-        
-        if (isFirst) {
+
+        // Jackson serializes boolean isFirstTask → "firstTask" or "isFirstTask"
+        const isFirstTaskToday = response.data.isFirstTask === true || response.data.firstTask === true;
+
+        // Only show the streak modal if this is today's FIRST completed task
+        if (isFirstTaskToday) {
           setShowStreakModal(true);
         }
       } catch (error) {

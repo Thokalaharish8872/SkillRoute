@@ -13,7 +13,7 @@ import java.util.List;
 public interface UserDetailsClient {
 
     @GetMapping("/get_skills_and_career_paths")
-    UserDetailsServiceResponse getSkillsAndCareerPaths(@RequestParam("userId") int userId);
+    UserDetailsServiceResponse getSkillsAndCareerPaths(@RequestParam("userId") int userId) throws Exception;
 
     @PostMapping("/update_career_paths")
     void updateCareerPaths(@RequestParam("userId") int userId, @RequestBody List<Integer> careerPaths) throws Exception;

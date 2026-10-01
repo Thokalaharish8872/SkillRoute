@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "user")
 @Builder
 @Data
 @AllArgsConstructor
@@ -33,6 +34,7 @@ public class User {
     private Integer skillsLearned;
     private Integer assessmentCompleted;
 
+    @ElementCollection
     private List<Integer> careerPaths;
 
     @ManyToOne
