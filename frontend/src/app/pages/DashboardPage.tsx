@@ -2,7 +2,7 @@ import { TrendingUp, Target, Award, Flame, Loader2 } from 'lucide-react';
 import { Link } from 'react-router';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getUserIdFromToken } from '../utils/api';
+import { getUserIdFromToken, API_BASE_URL } from '../utils/api';
 
 interface Activity {
   id?: number;
@@ -30,7 +30,7 @@ export function DashboardPage() {
         setIsLoading(true);
         const userId = getUserIdFromToken();
         const response = await axios.get<DashboardData>(
-          'http://localhost:8080/api/dashboard/get_dashboard_data',
+          `${API_BASE_URL}/api/dashboard/get_dashboard_data`,
           {
             params: userId ? { userId } : {},
           }

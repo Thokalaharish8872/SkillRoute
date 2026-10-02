@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/api';
 import { 
   ChevronDown, 
   ChevronRight, 
@@ -79,7 +80,7 @@ export function LearningSheetPage() {
 
   useEffect(() => {
     // Fetch initial streak on mount
-    axios.get('http://localhost:8080/api/streak/get_streak')
+    axios.get(`${API_BASE_URL}/api/streak/get_streak`)
       .then(res => setCurrentStreak(res.data.streak !== undefined ? res.data.streak : (res.data || 0)))
       .catch(console.error);
   }, []);
@@ -124,7 +125,7 @@ export function LearningSheetPage() {
     const fetchSheetData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:8080/api/modules/get_module', {
+        const response = await axios.get(`${API_BASE_URL}/api/modules/get_module`, {
           params: { moduleId: moduleId }
         });
         
@@ -232,7 +233,7 @@ export function LearningSheetPage() {
         const numericSkillId = parseInt(id.replace('p_', ''), 10);
 
         const response = await axios.post(
-          'http://localhost:8080/api/activity/update_activity',
+          `${API_BASE_URL}/api/activity/update_activity`,
           { userId:0,
             skillId: isNaN(numericSkillId) ? 0 : numericSkillId}
         );

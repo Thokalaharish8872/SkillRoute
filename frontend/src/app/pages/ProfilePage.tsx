@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/api';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 import { 
@@ -60,7 +61,7 @@ export function ProfilePage() {
   const fetchProfile = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:8080/api/profile/get_profile');
+      const response = await axios.get(`${API_BASE_URL}/api/profile/get_profile`);
       
       if (response.data) {
         const data = response.data;
@@ -85,7 +86,7 @@ export function ProfilePage() {
     if (!formData) return;
     try {
       setSaving(true);
-      const response = await axios.post('http://localhost:8080/api/profile/update_profile', formData);
+      const response = await axios.post(`${API_BASE_URL}/api/profile/update_profile`, formData);
       if (response.data) {
         const data = response.data;
         const profileData: Profile = {

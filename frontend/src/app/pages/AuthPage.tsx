@@ -7,6 +7,7 @@ import { Label } from "../components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { useAuth } from "../context/AuthContext";
+import { API_BASE_URL } from "../utils/api";
 
 export function AuthPage() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export function AuthPage() {
 
   const handleSocialLogin = (provider: string) => {
     // Navigate to default oauth2 authorization endpoint
-    window.location.href = `http://localhost:8080/oauth2/authorization/${provider}`;
+    window.location.href = `${API_BASE_URL}/oauth2/authorization/${provider}`;
   };
 
   const handleLoginSubmit = async (e: React.FormEvent) => {

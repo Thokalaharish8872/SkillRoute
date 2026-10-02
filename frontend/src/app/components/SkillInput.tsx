@@ -1,7 +1,7 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import axios from "axios";
 import { X, Plus } from 'lucide-react';
-import { getUserIdFromToken } from '../utils/api';
+import { getUserIdFromToken, API_BASE_URL } from '../utils/api';
 
 interface SkillInputProps {
   skills: string[];
@@ -20,7 +20,7 @@ export function SkillInput({ skills, onSkillsChange }: SkillInputProps) {
 
       try {
         await axios.post(
-          "http://localhost:8080/api/skills/add_skill",
+          `${API_BASE_URL}/api/skills/add_skill`,
           {
             userId: getUserIdFromToken(),
             skillName: newSkill,
@@ -35,7 +35,7 @@ export function SkillInput({ skills, onSkillsChange }: SkillInputProps) {
   const removeSkill = async (skillToRemove: string) => {
     try {
       const response = await axios.delete(
-        "http://localhost:8080/api/skills/remove_skill",
+        `${API_BASE_URL}/api/skills/remove_skill`,
         {
           data: {
             userId: getUserIdFromToken(),

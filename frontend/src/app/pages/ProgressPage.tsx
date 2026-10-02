@@ -2,7 +2,7 @@ import { ProgressTracker } from '../components/ProgressTracker';
 import { Calendar, Loader2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getUserIdFromToken } from '../utils/api';
+import { getUserIdFromToken, API_BASE_URL } from '../utils/api';
 import { SESSION_START_KEY } from '../layouts/RootLayout';
 
 // Key storing the last time active-time was flushed to the server
@@ -41,7 +41,7 @@ export function ProgressPage() {
         if (durationSeconds >= 5) {
           const userId = getUserIdFromToken();
           const token  = localStorage.getItem('token');
-          await fetch('http://localhost:8080/api/progress/update_active_time', {
+          await fetch(`${API_BASE_URL}/api/progress/update_active_time`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export function ProgressPage() {
       try {
         const userId = getUserIdFromToken();
         const res = await axios.get<ProgressResponse>(
-          'http://localhost:8080/api/progress/get_progress',
+          `${API_BASE_URL}/api/progress/get_progress`,
           { params: userId ? { userId } : {} }
         );
         console.log('RAW API response:', JSON.stringify(res.data, null, 2));

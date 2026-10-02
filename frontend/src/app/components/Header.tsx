@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../utils/api';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -214,7 +215,7 @@ export function Header({ streak }: { streak: number | string }) {
     const timer = setTimeout(async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8080/api/search/search?keyword=${encodeURIComponent(trimmed)}`
+          `${API_BASE_URL}/api/search/search?keyword=${encodeURIComponent(trimmed)}`
         );
         // res.data is either SearchResponse or SearchResponse[]
         setResults(parseSearchResponse(res.data));

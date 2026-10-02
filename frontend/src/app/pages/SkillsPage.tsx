@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { SkillInput } from '../components/SkillInput';
 import { SkillGaps } from '../components/SkillGaps';
 import axios from 'axios';
-import { getUserIdFromToken } from '../utils/api';
+import { getUserIdFromToken, API_BASE_URL } from '../utils/api';
 
 export function SkillsPage() {
   const [userSkills, setUserSkills] = useState<string[]>([]); 
@@ -34,7 +34,7 @@ export function SkillsPage() {
         try {
             const userId = getUserIdFromToken();
             const response = await axios.get(
-                "http://localhost:8080/api/skills/get_user_skills",
+                `${API_BASE_URL}/api/skills/get_user_skills`,
                 { params: userId ? { userId } : {} }
             );
 

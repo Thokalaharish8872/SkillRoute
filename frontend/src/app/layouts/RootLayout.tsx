@@ -3,6 +3,7 @@ import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../utils/api";
 
 // Key used to track when the session started (persisted across SPA navigations)
 export const SESSION_START_KEY = "sr_session_start";
@@ -20,7 +21,7 @@ export function RootLayout() {
   useEffect(() => {
     const fetchStreak = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/streak/get_streak');
+        const response = await axios.get(`${API_BASE_URL}/api/streak/get_streak`);
         setStreak(response.data.streak !== undefined ? response.data.streak : (response.data || 0));
       } catch (error) {
         console.error('Failed to fetch streak:', error);

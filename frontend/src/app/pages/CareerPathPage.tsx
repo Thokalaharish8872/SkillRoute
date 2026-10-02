@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, Link, useNavigate } from 'react-router';
 import { ArrowLeft, BookOpen, Clock, Code, Trophy, Check, AlertTriangle, RefreshCw, ServerCrash, Loader2 } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE_URL } from '../utils/api';
 
 interface Module {
   id: number;
@@ -136,7 +137,7 @@ export function CareerPathPage() {
     setLoading(true);
     setFetchError(null);
     try {
-      const response = await axios.post('http://localhost:8080/api/roadmap/get_roadmap', {
+      const response = await axios.post(`${API_BASE_URL}/api/roadmap/get_roadmap`, {
         roleTitle: roleQuery,
       });
 

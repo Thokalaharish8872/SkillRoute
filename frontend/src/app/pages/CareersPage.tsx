@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { RecommendedRoles } from '../components/RecommendedRoles';
 import { Filter, Loader2, AlertTriangle, ServerCrash, RefreshCw } from 'lucide-react';
-import { getUserIdFromToken } from '../utils/api';
+import { getUserIdFromToken, API_BASE_URL } from '../utils/api';
 
 type ErrorKind = 'ai_overload' | 'server' | 'network';
 
@@ -56,7 +56,7 @@ export function CareersPage() {
 
       const userId = getUserIdFromToken();
       const response = await axios.get(
-        'http://localhost:8080/api/career_path/recommendations',
+        `${API_BASE_URL}/api/career_path/recommendations`,
         { params: { userId: userId || undefined, refresh } }
       );
 
