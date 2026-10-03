@@ -141,13 +141,13 @@ services:
     - ./.env:/app/.env
 
   frontend:
-    build:
-      context: ./frontend
-    container_name: frontend
-    ports:
-      - "5173:80"
-    depends_on:
-      - skillroute-api-gateway
+  build:
+    context: ./frontend
+    args:
+      VITE_API_URL: ${VITE_API_URL}
+  container_name: frontend
+  ports:
+    - "5173:80"
 
   mysql:
     image: mysql:8.4

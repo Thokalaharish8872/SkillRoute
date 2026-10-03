@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 import axios from "axios";
 
-export const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+export const API_BASE_URL = import.meta.env.VITE_API_URL || "";
 export const VITE_API_URL = API_BASE_URL;
 
 axios.defaults.baseURL = API_BASE_URL;
